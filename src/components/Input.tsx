@@ -7,20 +7,24 @@ import {
   InputLeftAddon,
   InputProps,
 } from "@chakra-ui/react";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 type InputComponentPropsType = {
-  addonText: string;
+  addonText?: string;
   inputProps?: InputProps;
+  register?: UseFormRegisterReturn;
+  errors?: FieldError;
 };
 
 const InputComponent = (props: InputComponentPropsType) => {
+  const { addonText, inputProps, register, errors } = props;
   return (
-    <FormControl>
+    <FormControl isInvalid={Boolean(errors)}>
       <FormLabel
         display={{ base: "block", sm: "none" }}
         fontSize={{ base: "sm" }}
       >
-        {props.addonText}
+        {addonText}
       </FormLabel>
       <InputGroup size={{ base: "sm", md: "md" }}>
         <InputLeftAddon
@@ -29,18 +33,19 @@ const InputComponent = (props: InputComponentPropsType) => {
           display={{ base: "none", sm: "block" }}
           pt={{ sm: 1, md: 1.5 }}
         >
-          {props.addonText}
+          {addonText}
         </InputLeftAddon>
         <Input
-          {...props.inputProps}
+          {...register}
+          {...inputProps}
           sx={{
             borderTopLeftRadius: "0 !important",
             borderBottomLeftRadius: "0 !important",
-            ...props.inputProps?.sx,
+            ...inputProps?.sx,
           }}
         />
       </InputGroup>
-      <FormErrorMessage></FormErrorMessage>
+      <FormErrorMessage>{errors?.message}</FormErrorMessage>
     </FormControl>
   );
 };
