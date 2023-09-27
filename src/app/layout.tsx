@@ -10,7 +10,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <Flex minH="100vh" bg="gray.200" overflow={'auto'}>
+          <Flex h="100vh" bg="gray.50" sx={{ userSelect: "none" }}>
             {children}
           </Flex>
         </Providers>

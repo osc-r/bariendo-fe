@@ -11,7 +11,7 @@ const RegisterPage = () => {
   const router = useRouter();
   const onSubmitRegister: SubmitHandler<RegisterFormType> = (data) => {
     console.log(data);
-    router.push("/");
+    router.push("/home");
   };
 
   return (

@@ -10,7 +10,7 @@ const LoginPage = () => {
   const router = useRouter();
   const onSubmitLogin: SubmitHandler<LoginFormType> = (data) => {
     console.log(data);
-    router.push("/");
+    router.push("/home");
   };
 
   return (
