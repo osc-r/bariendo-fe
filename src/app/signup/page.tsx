@@ -1,15 +1,16 @@
 "use client";
+
+import SignUpForm from "@/forms/SignUpForm";
+import { SignUpFormType } from "@/types/forms";
 import { Link } from "@chakra-ui/next-js";
 import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
-import SignInForm from "@/forms/SignInForm";
-import { SubmitHandler } from "react-hook-form";
-import { SignInFormType } from "@/types/forms";
 import { useRouter } from "next/navigation";
+import { SubmitHandler } from "react-hook-form";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<SignInFormType> = (data) => {
+  const onSubmit: SubmitHandler<SignUpFormType> = (data) => {
     console.log(data);
     router.push("/home");
   };
@@ -30,21 +31,20 @@ const LoginPage = () => {
         overflow={"hidden"}
         boxShadow={"0px 10px 15px -3px rgba(0,0,0,0.2)"}
       >
-        <Stack spacing={2}>
-          <Heading color={"gray.700"}>Sign in</Heading>
-          <Text fontSize={"sm"} color={"gray.500"} mb={6}>
-            Hi there! Nice to see you again.
-          </Text>
-          <SignInForm onSubmit={onSubmit} />
+        <Stack spacing={2} mt={4}>
+          <Heading mb={8} color={"gray.700"}>
+            Sign Up
+          </Heading>
+          <SignUpForm onSubmit={onSubmit} />
           <Text
             textAlign={"center"}
             fontSize={{ base: "xs", sm: "sm" }}
             color={"gray.500"}
             fontWeight={"bold"}
           >
-            Haven't an Account?
-            <Link ml={2} href={"/signup"} color="red.500" fontWeight={"bold"}>
-              Sign Up
+            Have an account?
+            <Link ml={2} href={"/"} color="red.500" fontWeight={"bold"}>
+              Sign In
             </Link>
           </Text>
         </Stack>
@@ -53,4 +53,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

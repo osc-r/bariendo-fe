@@ -1,11 +1,11 @@
 import InputComponent from "@/components/Input";
 import { DefaultFormProps } from "@/types/defaultFormProps";
-import { LoginFormType } from "@/types/forms";
+import { SignInFormType } from "@/types/forms";
 import { Button, Stack } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 
-const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
-  const methods = useForm<LoginFormType>();
+const SignInForm: React.FC<DefaultFormProps<SignInFormType>> = (props) => {
+  const methods = useForm<SignInFormType>();
   const {
     handleSubmit,
     formState: { errors },
@@ -13,7 +13,10 @@ const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(props.onSubmit)}>
-        <Stack minW={{ base: "initial", sm: 300, md: 450 }} spacing={8}>
+        <Stack
+          minW={{ base: "initial", sm: 300, md: 450 }}
+          spacing={{ base: 6, md: 8 }}
+        >
           <InputComponent
             register={methods.register("email", { required: "*Required" })}
             addonText="Email"
@@ -34,7 +37,7 @@ const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
             colorScheme="red"
             mt={6}
             mb={6}
-            size={{ base: "sm", md: "md" }}
+            size={"md"}
           >
             Sign In
           </Button>
@@ -44,4 +47,4 @@ const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
   );
 };
 
-export default LoginForm;
+export default SignInForm;

@@ -1,9 +1,9 @@
-export type LoginFormType = {
+export type SignInFormType = {
   email: string;
   password: string;
 };
 
-export type RegisterFormType = LoginFormType & {
-  email: string;
+export type SignUpFormType = SignInFormType & {
   confirmPassword: string;
+  consent: boolean;
 };
