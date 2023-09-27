@@ -100,129 +100,137 @@ const BookingForm: React.FC<DefaultFormProps<BookingFormType>> = (props) => {
               <FormErrorMessage>{errors?.month?.message}</FormErrorMessage>
             </FormControl>
 
-            <Text
-              fontSize={{ base: "sm", md: "md" }}
-              fontWeight={"bold"}
-              mt={4}
-            >
-              Select Schedule
-            </Text>
-            <FormControl isInvalid={Boolean(errors.date)}>
-              <RadioGroup>
-                <Flex
-                  p={3}
-                  overflowX="auto"
-                  overflowY={"hidden"}
-                  css={{
-                    "&::-webkit-scrollbar": {
-                      display: "none",
-                    },
-                  }}
+            {selectedMonth && (
+              <React.Fragment>
+                <Text
+                  fontSize={{ base: "sm", md: "md" }}
+                  fontWeight={"bold"}
+                  mt={4}
                 >
-                  {dates.map((i) => (
-                    <label style={{ marginRight: 8 }} key={i.value}>
-                      <Flex
-                        flexDir={"column"}
-                        bg="gray.100"
-                        w={{ base: 14, sm: 16, md: 16 }}
-                        h={{ base: 14, sm: 16, md: 16 }}
-                        borderRadius={12}
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        cursor={"pointer"}
-                        borderColor={
-                          selectedDate === i.value ? "red.500" : "transparent"
-                        }
-                        borderWidth={2}
-                        transition={"all 0.2s ease-in-out"}
-                      >
-                        <Text
-                          fontSize={{ base: "xs", sm: "sm", md: "sm" }}
-                          fontWeight={"bold"}
-                        >
-                          {i.day}
-                        </Text>
-                        <Text
-                          fontSize={{ base: "xs", sm: "sm", md: "sm" }}
-                          fontWeight={"bold"}
-                        >
-                          {i.date}
-                        </Text>
-                      </Flex>
-                      <Radio
-                        value={i.value}
-                        hidden
-                        {...methods.register("date", {
-                          required: "*Please select date",
-                        })}
-                      />
-                    </label>
-                  ))}
-                </Flex>
-              </RadioGroup>
-              <FormErrorMessage mt={{ base: -6, md: -4 }}>
-                {errors?.date?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <Divider borderTopWidth={2}></Divider>
-            <FormControl isInvalid={Boolean(errors.date)}>
-              <RadioGroup>
-                <Flex
-                  p={3}
-                  overflowX="auto"
-                  overflowY={"hidden"}
-                  css={{
-                    "&::-webkit-scrollbar": {
-                      display: "none",
-                    },
-                  }}
-                >
-                  {dates.map((i) => (
-                    <label style={{ marginRight: 8 }} key={i.value}>
-                      <Flex
-                        flexDir={"column"}
-                        bg="gray.100"
-                        w={{ base: 14, sm: 16, md: 16 }}
-                        h={{ base: 14, sm: 16, md: 16 }}
-                        borderRadius={12}
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        cursor={"pointer"}
-                        borderColor={
-                          selectedDate === i.value ? "red.500" : "transparent"
-                        }
-                        borderWidth={2}
-                        transition={"all 0.2s ease-in-out"}
-                      >
-                        <Text
-                          fontSize={{ base: "xs", sm: "sm", md: "sm" }}
-                          fontWeight={"bold"}
-                        >
-                          {i.day}
-                        </Text>
-                        <Text
-                          fontSize={{ base: "xs", sm: "sm", md: "sm" }}
-                          fontWeight={"bold"}
-                        >
-                          {i.date}
-                        </Text>
-                      </Flex>
-                      <Radio
-                        value={i.value}
-                        hidden
-                        {...methods.register("date", {
-                          required: "*Please select date",
-                        })}
-                      />
-                    </label>
-                  ))}
-                </Flex>
-              </RadioGroup>
-              <FormErrorMessage mt={{ base: -6, md: -4 }}>
-                {errors?.date?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <Divider borderTopWidth={2}></Divider>
+                  Select Schedule
+                </Text>
+                <FormControl isInvalid={Boolean(errors.date)}>
+                  <RadioGroup>
+                    <Flex
+                      p={3}
+                      overflowX="auto"
+                      overflowY={"hidden"}
+                      css={{
+                        "&::-webkit-scrollbar": {
+                          display: "none",
+                        },
+                      }}
+                    >
+                      {dates.map((i) => (
+                        <label style={{ marginRight: 8 }} key={i.value}>
+                          <Flex
+                            flexDir={"column"}
+                            bg="gray.50"
+                            w={{ base: 14, sm: 16, md: 16 }}
+                            h={{ base: 14, sm: 16, md: 16 }}
+                            borderRadius={12}
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                            cursor={"pointer"}
+                            borderColor={
+                              selectedDate === i.value
+                                ? "red.500"
+                                : "transparent"
+                            }
+                            borderWidth={2}
+                            transition={"all 0.2s ease-in-out"}
+                          >
+                            <Text
+                              fontSize={{ base: "xs", sm: "sm", md: "sm" }}
+                              fontWeight={"bold"}
+                            >
+                              {i.day}
+                            </Text>
+                            <Text
+                              fontSize={{ base: "xs", sm: "sm", md: "sm" }}
+                              fontWeight={"bold"}
+                            >
+                              {i.date}
+                            </Text>
+                          </Flex>
+                          <Radio
+                            value={i.value}
+                            hidden
+                            {...methods.register("date", {
+                              required: "*Please select date",
+                            })}
+                          />
+                        </label>
+                      ))}
+                    </Flex>
+                  </RadioGroup>
+                  <FormErrorMessage mt={{ base: -6, md: -4 }}>
+                    {errors?.date?.message}
+                  </FormErrorMessage>
+                </FormControl>
+                <Divider borderTopWidth={2}></Divider>
+                <FormControl isInvalid={Boolean(errors.date)}>
+                  <RadioGroup>
+                    <Flex
+                      p={3}
+                      overflowX="auto"
+                      overflowY={"hidden"}
+                      css={{
+                        "&::-webkit-scrollbar": {
+                          display: "none",
+                        },
+                      }}
+                    >
+                      {dates.map((i) => (
+                        <label style={{ marginRight: 8 }} key={i.value}>
+                          <Flex
+                            flexDir={"column"}
+                            bg="gray.50"
+                            w={{ base: 14, sm: 16, md: 16 }}
+                            h={{ base: 14, sm: 16, md: 16 }}
+                            borderRadius={12}
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                            cursor={"pointer"}
+                            borderColor={
+                              selectedDate === i.value
+                                ? "red.500"
+                                : "transparent"
+                            }
+                            borderWidth={2}
+                            transition={"all 0.2s ease-in-out"}
+                          >
+                            <Text
+                              fontSize={{ base: "xs", sm: "sm", md: "sm" }}
+                              fontWeight={"bold"}
+                            >
+                              {i.day}
+                            </Text>
+                            <Text
+                              fontSize={{ base: "xs", sm: "sm", md: "sm" }}
+                              fontWeight={"bold"}
+                            >
+                              {i.date}
+                            </Text>
+                          </Flex>
+                          <Radio
+                            value={i.value}
+                            hidden
+                            {...methods.register("date", {
+                              required: "*Please select date",
+                            })}
+                          />
+                        </label>
+                      ))}
+                    </Flex>
+                  </RadioGroup>
+                  <FormErrorMessage mt={{ base: -6, md: -4 }}>
+                    {errors?.date?.message}
+                  </FormErrorMessage>
+                </FormControl>
+                <Divider borderTopWidth={2}></Divider>
+              </React.Fragment>
+            )}
           </Stack>
         </Flex>
         <Flex

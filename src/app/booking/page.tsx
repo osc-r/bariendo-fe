@@ -24,17 +24,22 @@ const MOCK: BookingResponse[] = [
   {
     title: "Dr. Halima Sheppard",
     detail: "Cardiologist",
-    bookingDateTime: new Date(2023, 8, 27, 9, 0).toLocaleString(),
-  },
-  {
-    title: "Dr. Kenneth Walters",
-    detail: "Orthodontist",
-    bookingDateTime: new Date(2023, 8, 27, 11, 30).toLocaleString(),
+    bookingDateTime: new Date().toISOString(),
   },
   {
     title: "Dr. Jennifer Stone",
     detail: "Eye Specialist",
-    bookingDateTime: new Date(2023, 7, 17, 14, 30).toLocaleString(),
+    bookingDateTime: new Date().toISOString(),
+  },
+  {
+    title: "Dr. Kenneth Walters",
+    detail: "Orthodontist",
+    bookingDateTime: new Date(2023, 8, 27, 11, 30).toISOString(),
+  },
+  {
+    title: "Dr. Jennifer Stone",
+    detail: "Eye Specialist",
+    bookingDateTime: new Date(2023, 7, 17, 14, 30).toISOString(),
   },
 ];
 
@@ -46,7 +51,7 @@ const HomePage = () => {
   useEffect(() => {
     setTimeout(() => {
       setList(MOCK);
-    }, 2500);
+    }, 500);
   }, []);
 
   return (
@@ -86,6 +91,7 @@ const HomePage = () => {
             icon={<TbLogout size={18} color="red" />}
             pos={"absolute"}
             right={{ base: 2, sm: 4 }}
+            onClick={() => router.replace("/")}
           />
         </Flex>
         <Flex
