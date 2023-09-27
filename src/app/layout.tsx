@@ -10,7 +10,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <Flex minH="100vh" bg="gray.200">
+          <Flex minH="100vh" bg="gray.200" overflow={'auto'}>
             {children}
           </Flex>
         </Providers>

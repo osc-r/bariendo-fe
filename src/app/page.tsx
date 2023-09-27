@@ -1,5 +1,5 @@
 "use client";
-import { Link } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/next-js";
 import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
 import LoginForm from "@/forms/Login";
 import { SubmitHandler } from "react-hook-form";

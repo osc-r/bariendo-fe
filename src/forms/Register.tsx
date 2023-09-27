@@ -1,14 +1,15 @@
 import InputComponent from "@/components/Input";
 import { DefaultFormProps } from "@/types/defaultFormProps";
-import { LoginFormType } from "@/types/forms";
+import { RegisterFormType } from "@/types/forms";
 import { Button, Stack } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 
-const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
-  const methods = useForm<LoginFormType>();
+const RegisterForm: React.FC<DefaultFormProps<RegisterFormType>> = (props) => {
+  const methods = useForm<RegisterFormType>();
   const {
     handleSubmit,
     formState: { errors },
+    getValues,
   } = methods;
   return (
     <FormProvider {...methods}>
@@ -20,21 +21,38 @@ const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
             errors={errors.username}
           />
           <InputComponent
+            register={methods.register("email", { required: "*Required" })}
+            addonText="Email"
+            errors={errors.email}
+          />
+          <InputComponent
             register={methods.register("password", {
               required: "*Required",
               minLength: { value: 8, message: "*Minimum length is 8" },
+              deps: ["confirmPassword"],
             })}
             inputProps={{ type: "password" }}
             addonText="Password"
             errors={errors.password}
           />
+          <InputComponent
+            register={methods.register("confirmPassword", {
+              required: "*Required",
+              minLength: { value: 8, message: "*Minimum length is 8" },
+              validate: (value) =>
+                value === getValues("password") || "Password is not match",
+            })}
+            inputProps={{ type: "password" }}
+            addonText="Confirm Password"
+            errors={errors.confirmPassword}
+          />
           <Button
             type="submit"
             colorScheme="green"
-            mt={6}
+            mt={8}
             size={{ base: "sm", md: "md" }}
           >
-            Login
+            Register
           </Button>
         </Stack>
       </form>
@@ -42,4 +60,4 @@ const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
