@@ -16,23 +16,34 @@ const LoginPage = () => {
   return (
     <Container
       display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
+      justifyContent={{ base: "initial", sm: "center" }}
+      alignItems={{ base: "initial", sm: "center" }}
       maxW={{ base: "container.sm", md: "container.md" }}
+      p={{ base: 0, sm: "initial" }}
     >
-      <Box bg="gray.50" p={8} borderRadius={8}>
+      <Box
+        flex={{ base: 1, sm: "initial" }}
+        p={8}
+        bg="white"
+        borderRadius={8}
+        overflow={"hidden"}
+        boxShadow={"0px 10px 15px -3px rgba(0,0,0,0.2)"}
+      >
         <Stack spacing={2}>
-          <Text fontSize={"sm"} color={"gray.500"}>
-            Welcome to
+          <Heading color={"gray.700"}>Sign in</Heading>
+          <Text fontSize={"sm"} color={"gray.500"} mb={6}>
+            Hi there! Nice to see you again.
           </Text>
-          <Heading mt={-2} mb={6} color={"gray.700"}>
-            DocBook
-          </Heading>
           <LoginForm onSubmit={onSubmitLogin} />
-          <Text textAlign={"center"} fontSize={"sm"}>
-            Don't have account?
-            <Link ml={2} href={"/register"} color="blue.500">
-              Register
+          <Text
+            textAlign={"center"}
+            fontSize={{ base: "xs", sm: "sm" }}
+            color={"gray.400"}
+            fontWeight={"bold"}
+          >
+            Haven't an Account?
+            <Link ml={2} href={"/register"} color="red.500" fontWeight={"bold"}>
+              Sign Up
             </Link>
           </Text>
         </Stack>

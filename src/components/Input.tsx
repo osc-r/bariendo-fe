@@ -20,31 +20,8 @@ const InputComponent = (props: InputComponentPropsType) => {
   const { addonText, inputProps, register, errors } = props;
   return (
     <FormControl isInvalid={Boolean(errors)}>
-      <FormLabel
-        display={{ base: "block", sm: "none" }}
-        fontSize={{ base: "sm" }}
-      >
-        {addonText}
-      </FormLabel>
-      <InputGroup size={{ base: "sm", md: "md" }}>
-        <InputLeftAddon
-          borderTopRightRadius={"0 !important"}
-          borderBottomRightRadius={"0 !important"}
-          display={{ base: "none", sm: "block" }}
-          pt={{ sm: 1, md: 1.5 }}
-        >
-          {addonText}
-        </InputLeftAddon>
-        <Input
-          {...register}
-          {...inputProps}
-          sx={{
-            borderTopLeftRadius: "0 !important",
-            borderBottomLeftRadius: "0 !important",
-            ...inputProps?.sx,
-          }}
-        />
-      </InputGroup>
+      <FormLabel fontSize={{ base: "sm" }} color={'red.500'}>{addonText}</FormLabel>
+      <Input {...register} {...inputProps} variant={'flushed'} />
       <FormErrorMessage>{errors?.message}</FormErrorMessage>
     </FormControl>
   );

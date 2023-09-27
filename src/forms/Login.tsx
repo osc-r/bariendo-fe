@@ -13,11 +13,11 @@ const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(props.onSubmit)}>
-        <Stack>
+        <Stack minW={{ base: "initial", sm: 300, md: 450 }} spacing={8}>
           <InputComponent
-            register={methods.register("username", { required: "*Required" })}
-            addonText="Username"
-            errors={errors.username}
+            register={methods.register("email", { required: "*Required" })}
+            addonText="Email"
+            errors={errors.email}
           />
           <InputComponent
             register={methods.register("password", {
@@ -30,11 +30,13 @@ const LoginForm: React.FC<DefaultFormProps<LoginFormType>> = (props) => {
           />
           <Button
             type="submit"
-            colorScheme="green"
+            bg="red.500"
+            colorScheme="red"
             mt={6}
+            mb={6}
             size={{ base: "sm", md: "md" }}
           >
-            Login
+            Sign In
           </Button>
         </Stack>
       </form>
