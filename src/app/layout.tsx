@@ -1,3 +1,4 @@
+import { Flex } from "@chakra-ui/react";
 import { Providers } from "./providers";
 
 export default function RootLayout({
@@ -8,7 +9,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Flex minH="100vh" bg="gray.200">
+            {children}
+          </Flex>
+        </Providers>
       </body>
     </html>
   );
