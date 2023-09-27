@@ -11,7 +11,7 @@ const LoginPage = () => {
 
   const onSubmit: SubmitHandler<SignInFormType> = (data) => {
     console.log(data);
-    router.push("/home");
+    router.push("/booking");
   };
 
   return (

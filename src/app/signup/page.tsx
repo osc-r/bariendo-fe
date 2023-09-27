@@ -12,7 +12,7 @@ const RegisterPage = () => {
 
   const onSubmit: SubmitHandler<SignUpFormType> = (data) => {
     console.log(data);
-    router.push("/home");
+    router.push("/booking");
   };
 
   return (
