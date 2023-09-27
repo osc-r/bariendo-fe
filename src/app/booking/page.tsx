@@ -72,7 +72,8 @@ const HomePage = () => {
           pt={{ base: 6, md: 10 }}
         >
           <Heading
-            fontSize={{ base: "md", md: "2xl" }}
+            mt={{ base: 1, sm: 0 }}
+            fontSize={{ base: "lg", md: "2xl" }}
             color={"gray.700"}
             textAlign={"center"}
           >
@@ -82,9 +83,9 @@ const HomePage = () => {
             variant={"ghost"}
             size={{ base: "xs", md: "sm" }}
             aria-label="logout"
-            icon={<TbLogout size={16} color="red" />}
+            icon={<TbLogout size={18} color="red" />}
             pos={"absolute"}
-            right={4}
+            right={{ base: 2, sm: 4 }}
           />
         </Flex>
         <Flex
@@ -150,7 +151,8 @@ const HomePage = () => {
             color="white"
             w="100%"
             fontSize={{ base: "sm", md: "md" }}
-            leftIcon={<IoMdAdd size={18} />}
+            leftIcon={<IoMdAdd size={22} />}
+            onClick={() => router.push("/booking/create")}
           >
             Booking Appointment
           </Button>
