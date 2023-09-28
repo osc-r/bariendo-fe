@@ -62,13 +62,12 @@ export const generateDateInMonthFromGivenDate = (date: string) => {
   const isCurrentMonth = isSameDay(new Date().toISOString(), date);
 
   const limit = isCurrentMonth
-    ? totalDayInMonth - currentDateInstance.getDate()
+    ? totalDayInMonth - currentDateInstance.getDate() + 1
     : totalDayInMonth;
 
+  const beforeCalDate = currentDateInstance.getDate();
   for (let i = 0; i < limit; i++) {
-    currentDateInstance.setDate(
-      isCurrentMonth ? currentDateInstance.getDate() + i : 1 + i
-    );
+    currentDateInstance.setDate(isCurrentMonth ? beforeCalDate + i : 1 + i);
     dateList.push({
       value: `${currentDateInstance.getFullYear()}/${
         currentDateInstance.getMonth() + 1
