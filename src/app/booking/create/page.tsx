@@ -12,6 +12,7 @@ const CreateBookingPage = () => {
 
   const onSubmit: SubmitHandler<BookingFormType> = (data) => {
     console.log(data);
+    router.push("/booking");
   };
 
   return (
@@ -28,7 +29,12 @@ const CreateBookingPage = () => {
         overflow={"auto"}
         flexDir={"column"}
         boxShadow={"0px 10px 15px -3px rgba(0,0,0,0.2)"}
-        p={{ base: 4, md: 8 }}
+        p={{ base: 0, sm: 4, md: 8 }}
+        css={{
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+        }}
       >
         <Box>
           <IconButton
@@ -37,15 +43,11 @@ const CreateBookingPage = () => {
             size={{ base: "xs", md: "sm" }}
             aria-label="logout"
             icon={<BiArrowBack size={22} color="red" />}
+            mt={{ base: 4, sm: 0 }}
           />
         </Box>
 
-        <Flex
-          pos="relative"
-          flex={1}
-          flexDir={"column"}
-          p={4}
-        >
+        <Flex pos="relative" flex={1} flexDir={"column"} p={4}>
           <Text fontSize={{ base: "xl", md: "2xl" }} color={"gray.700"} mb={8}>
             Booking Appointments
           </Text>

@@ -33,7 +33,10 @@ const BookingCard = (props: BookingCardType) => {
             color="gray.600"
             fontSize={{ base: "xs", sm: "sm", md: "md" }}
           >
-            {new Date(props.bookingDateTime).toLocaleString().split(",")[1]}
+            {Intl.DateTimeFormat(undefined, {
+              hour: "2-digit",
+              minute: "2-digit",
+            }).format(new Date(props.bookingDateTime))}
           </Text>
         </Flex>
       </CardBody>

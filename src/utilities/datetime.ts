@@ -79,3 +79,28 @@ export const generateDateInMonthFromGivenDate = (date: string) => {
   }
   return dateList;
 };
+
+export const  generateTimeslot = () => {
+  const SLOT = 24;
+  const list = [];
+  const date = new Date();
+  date.setMinutes(0);
+  date.setSeconds(0);
+  date.setMilliseconds(0);
+  for (let i = 0; i < SLOT; i++) {
+    date.setHours(i);
+    const [time, unit] = Intl.DateTimeFormat(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    })
+      .format(date)
+      .split(" ");
+
+    list.push({
+      value: date.toTimeString().split(" ")[0],
+      label: `${time.slice(0, 5)} ${unit}`,
+    });
+  }
+  return list;
+};

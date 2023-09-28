@@ -1,10 +1,13 @@
 "use client";
 import {
   Button,
+  Checkbox,
   Divider,
   Flex,
   FormControl,
   FormErrorMessage,
+  Grid,
+  GridItem,
   Radio,
   RadioGroup,
   Select,
@@ -15,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import {
   generateDateInMonthFromGivenDate,
   generateMonthsFromTodayUntilNext,
+  generateTimeslot,
 } from "../utilities/datetime";
 import { FormProvider, useForm } from "react-hook-form";
 import { DefaultFormProps } from "@/types/defaultFormProps";
@@ -23,7 +27,7 @@ import { BookingFormType } from "@/types/forms";
 const BOOKING_MONTHS_IN_ADVANCED = 6;
 
 const BookingForm: React.FC<DefaultFormProps<BookingFormType>> = (props) => {
-  const methods = useForm<BookingFormType>();
+  const methods = useForm<BookingFormType>({ defaultValues: { time: [] } });
   const {
     handleSubmit,
     formState: { errors },
@@ -31,6 +35,7 @@ const BookingForm: React.FC<DefaultFormProps<BookingFormType>> = (props) => {
   } = methods;
 
   const [months, setMonths] = useState<{ label: string; value: string }[]>([]);
+  const [times, setTimes] = useState<{ label: string; value: string }[]>([]);
 
   const [dates, setDates] = useState<
     { value: string; day: string; date: number }[]
@@ -41,17 +46,25 @@ const BookingForm: React.FC<DefaultFormProps<BookingFormType>> = (props) => {
       const list = generateMonthsFromTodayUntilNext(BOOKING_MONTHS_IN_ADVANCED);
       setMonths(list);
     };
+
+    const genTimes = () => {
+      const list = generateTimeslot();
+      setTimes(list);
+    };
+
     getMonths();
+    genTimes();
   }, []);
 
   const selectedMonth = watch("month");
   const selectedDate = watch("date");
+  const selectedTimes = watch("time");
 
   useEffect(() => {
     const genDates = () => {
       const list = generateDateInMonthFromGivenDate(selectedMonth);
       setDates(list);
-      methods.setValue("date", list[0].value);
+      methods.setValue("date", "");
     };
     selectedMonth && genDates();
   }, [selectedMonth]);
@@ -112,7 +125,6 @@ const BookingForm: React.FC<DefaultFormProps<BookingFormType>> = (props) => {
                 <FormControl isInvalid={Boolean(errors.date)}>
                   <RadioGroup>
                     <Flex
-                      p={3}
                       overflowX="auto"
                       overflowY={"hidden"}
                       css={{
@@ -164,69 +176,64 @@ const BookingForm: React.FC<DefaultFormProps<BookingFormType>> = (props) => {
                       ))}
                     </Flex>
                   </RadioGroup>
-                  <FormErrorMessage mt={{ base: -6, md: -4 }}>
-                    {errors?.date?.message}
-                  </FormErrorMessage>
+                  {errors?.date?.message && (
+                    <FormErrorMessage mt={{ base: -6, md: -4 }}>
+                      {errors?.date?.message}
+                    </FormErrorMessage>
+                  )}
                 </FormControl>
-                <Divider borderTopWidth={2}></Divider>
-                <FormControl isInvalid={Boolean(errors.date)}>
-                  <RadioGroup>
-                    <Flex
-                      p={3}
-                      overflowX="auto"
-                      overflowY={"hidden"}
-                      css={{
-                        "&::-webkit-scrollbar": {
-                          display: "none",
-                        },
-                      }}
-                    >
-                      {dates.map((i) => (
-                        <label style={{ marginRight: 8 }} key={i.value}>
+                <Divider borderTopWidth={2} mt={-4} mb={2}></Divider>
+                <FormControl isInvalid={Boolean(errors.time)}>
+                  <Grid
+                    templateColumns={"repeat(12, 1fr)"}
+                    columnGap={{ base: 1.5, sm: 4 }}
+                  >
+                    {times.map((i) => (
+                      <GridItem
+                        key={i.value}
+                        colSpan={{ base: 4, md: 3 }}
+                        mb={{ base: 1.5, sm: 4 }}
+                      >
+                        <label>
                           <Flex
                             flexDir={"column"}
-                            bg="gray.50"
-                            w={{ base: 14, sm: 16, md: 16 }}
-                            h={{ base: 14, sm: 16, md: 16 }}
-                            borderRadius={12}
+                            bg="white"
+                            p={{ base: 1.5, sm: 2 }}
+                            borderRadius={{ base: 8, sm: 12 }}
                             justifyContent={"center"}
                             alignItems={"center"}
                             cursor={"pointer"}
                             borderColor={
-                              selectedDate === i.value
+                              selectedTimes.includes(i.value)
                                 ? "red.500"
-                                : "transparent"
+                                : "gray.100"
                             }
                             borderWidth={2}
                             transition={"all 0.2s ease-in-out"}
                           >
                             <Text
-                              fontSize={{ base: "xs", sm: "sm", md: "sm" }}
+                              fontSize={{ base: "x-small", sm: "sm" }}
                               fontWeight={"bold"}
                             >
-                              {i.day}
-                            </Text>
-                            <Text
-                              fontSize={{ base: "xs", sm: "sm", md: "sm" }}
-                              fontWeight={"bold"}
-                            >
-                              {i.date}
+                              {i.label}
                             </Text>
                           </Flex>
-                          <Radio
+                          <Checkbox
                             value={i.value}
                             hidden
-                            {...methods.register("date", {
-                              required: "*Please select date",
+                            {...methods.register("time", {
+                              required: "*Please select timeslot",
                             })}
                           />
                         </label>
-                      ))}
-                    </Flex>
-                  </RadioGroup>
-                  <FormErrorMessage mt={{ base: -6, md: -4 }}>
-                    {errors?.date?.message}
-                  </FormErrorMessage>
+                      </GridItem>
+                    ))}
+                  </Grid>
+                  {errors?.time?.message && (
+                    <FormErrorMessage mt={{ base: -6, md: -4 }}>
+                      {errors?.time?.message}
+                    </FormErrorMessage>
+                  )}
                 </FormControl>
                 <Divider borderTopWidth={2}></Divider>
               </React.Fragment>
